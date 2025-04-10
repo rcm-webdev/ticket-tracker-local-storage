@@ -1,3 +1,7 @@
-export default function LoginButton() {
-  return <button className="btn btn-primary">Create your first ticket</button>;
+export default function LoginButton({ size }) {
+  return (
+    <button className={`btn btn-primary btn-${size}`}>
+      Create your first ticket
+    </button>
+  );
 }
