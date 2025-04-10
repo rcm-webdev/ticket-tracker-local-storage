@@ -14,7 +14,7 @@ export default function Hero() {
               <span className="font-bold">Rabbit</span>, is a local-first ticket
               tracker built for fast, no-fuss issue management.
             </p>
-            <LoginButton />
+            <LoginButton size={"xl"} />
           </div>
         </div>
       </div>
