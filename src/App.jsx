@@ -1,10 +1,15 @@
 import "./App.css";
+import Form from "./components/Form";
+import Hero from "./components/Hero";
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
-    <>
-      <div className="btn btn-primary">Hello World</div>
-    </>
+    <div>
+      <Navbar />
+      <Hero />
+      <Form />
+    </div>
   );
 }
 
