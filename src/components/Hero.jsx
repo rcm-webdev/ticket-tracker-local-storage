@@ -8,10 +8,10 @@ export default function Hero() {
           <div className="max-w-md">
             <h1 className="text-5xl ">
               Ticket Tracker powered by{" "}
-              <span className="text-primary font-extrabold">Rabbit</span>
+              <span className="text-primary font-extrabold">Rabit</span>
             </h1>
             <p className="py-6">
-              <span className="font-bold">Rabbit</span>, is a local-first ticket
+              <span className="font-bold">Rabit</span>, is a local-first ticket
               tracker built for fast, no-fuss issue management.
             </p>
             <LoginButton size={"xl"} />
