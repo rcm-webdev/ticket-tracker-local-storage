@@ -1,4 +1,4 @@
-export default function SignupnForm() {
+export default function SignupForm() {
   return (
     <div className="max-w-sm mx-auto mt-10 p-8 bg-base-200 rounded-2xl shadow-md">
       <svg
