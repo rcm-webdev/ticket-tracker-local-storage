@@ -2,7 +2,7 @@ import { useState } from "react";
 import { addTicket } from "../utils/storage";
 import { v4 as uuidv4 } from "uuid";
 
-export default function Form() {
+export default function Form({ setTickets }) {
   const [subject, setSubject] = useState("");
   const [description, setDescription] = useState("");
   const [severity, setSeverity] = useState("Low");
@@ -21,6 +21,7 @@ export default function Form() {
     };
 
     addTicket(newTicket);
+    setTickets((prev) => [...prev, newTicket]);
 
     // Reset form
     setSubject("");
