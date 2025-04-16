@@ -1,21 +1,12 @@
-import { useEffect, useState } from "react";
-import { getTickets, deleteTicket } from "../utils/storage";
-
-export default function TicketList() {
-  const [tickets, setTickets] = useState([]);
-
-  useEffect(() => {
-    setTickets(getTickets());
-  }, []);
-
+export default function TicketList({ tickets, setTickets }) {
   const handleDelete = (id) => {
-    deleteTicket(id);
-    setTickets(getTickets()); // Refresh after deletion
+    const updated = tickets.filter((ticket) => ticket.id !== id);
+    localStorage.setItem("tickets", JSON.stringify(updated));
+    setTickets(updated); // update state
   };
 
   return (
     <div className="space-y-4">
-      <h1 className="font-bold text-2xl">Tickets</h1>
       {tickets.map((ticket) => (
         <div
           key={ticket.id}
