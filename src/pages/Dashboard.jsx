@@ -6,6 +6,7 @@ import { getTickets } from "../utils/storage";
 
 export default function Dashboard() {
   const [tickets, setTickets] = useState([]);
+  const [editingTicket, setEditingTicket] = useState(null);
 
   useEffect(() => {
     setTickets(getTickets());
@@ -22,7 +23,11 @@ export default function Dashboard() {
         <h1 className="text-4xl font-bold mb-6">Welcome to Dashboard</h1>
         <div className="flex gap-5 justify-between">
           <div className="w-1/2">
-            <Form setTickets={setTickets} />
+            <Form
+              setTickets={setTickets}
+              editingTicket={editingTicket}
+              setEditingTicket={setEditingTicket}
+            />
           </div>
           <div className="w-1/2">
             <h1 className="font-bold text-2xl">Tickets</h1>
@@ -31,7 +36,11 @@ export default function Dashboard() {
               Ticket #4
             </li> */}
 
-              <TicketList tickets={tickets} setTickets={setTickets} />
+              <TicketList
+                tickets={tickets}
+                setTickets={setTickets}
+                setEditingTicket={setEditingTicket}
+              />
             </div>
           </div>
         </div>
