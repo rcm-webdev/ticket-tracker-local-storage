@@ -1,6 +1,6 @@
 import toast from "react-hot-toast";
 
-export default function TicketList({ tickets, setTickets }) {
+export default function TicketList({ tickets, setTickets, setEditingTicket }) {
   const handleDelete = (id) => {
     const updated = tickets.filter((ticket) => ticket.id !== id);
     localStorage.setItem("tickets", JSON.stringify(updated));
@@ -21,12 +21,20 @@ export default function TicketList({ tickets, setTickets }) {
           <p className="text-sm text-accent">
             Assigned to: {ticket.assignedTo}
           </p>
-          <button
-            onClick={() => handleDelete(ticket.id)}
-            className="btn btn-sm btn-error mt-2"
-          >
-            Delete
-          </button>
+          <div className="mt-2 flex gap-2 items-center">
+            <button
+              onClick={() => setEditingTicket(ticket)}
+              className="btn btn-sm btn-primary"
+            >
+              Edit
+            </button>
+            <button
+              onClick={() => handleDelete(ticket.id)}
+              className="btn btn-sm btn-error"
+            >
+              Delete
+            </button>
+          </div>
         </div>
       ))}
     </div>
