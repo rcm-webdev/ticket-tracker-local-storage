@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { addTicket } from "../utils/storage";
 import { v4 as uuidv4 } from "uuid";
+import toast from "react-hot-toast";
 
 export default function Form({ setTickets }) {
   const [subject, setSubject] = useState("");
@@ -22,6 +23,8 @@ export default function Form({ setTickets }) {
 
     addTicket(newTicket);
     setTickets((prev) => [...prev, newTicket]);
+
+    toast.success("Ticket created! 🐇");
 
     // Reset form
     setSubject("");

@@ -1,8 +1,11 @@
+import toast from "react-hot-toast";
+
 export default function TicketList({ tickets, setTickets }) {
   const handleDelete = (id) => {
     const updated = tickets.filter((ticket) => ticket.id !== id);
     localStorage.setItem("tickets", JSON.stringify(updated));
     setTickets(updated); // update state
+    toast.success("Ticket deleted 🗑️");
   };
 
   return (
