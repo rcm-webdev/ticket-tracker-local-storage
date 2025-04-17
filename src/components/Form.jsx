@@ -1,30 +1,55 @@
-import { useState } from "react";
-import { addTicket } from "../utils/storage";
+import { useState, useEffect } from "react";
+import { addTicket, updateTicket } from "../utils/storage";
 import { v4 as uuidv4 } from "uuid";
 import toast from "react-hot-toast";
 
-export default function Form({ setTickets }) {
+export default function Form({ setTickets, editingTicket, setEditingTicket }) {
   const [subject, setSubject] = useState("");
   const [description, setDescription] = useState("");
   const [severity, setSeverity] = useState("Low");
   const [assignedTo, setAssignedTo] = useState("");
 
+  useEffect(() => {
+    if (editingTicket) {
+      setSubject(editingTicket.subject);
+      setDescription(editingTicket.description);
+      setSeverity(editingTicket.severity);
+      setAssignedTo(editingTicket.assignedTo);
+    }
+  }, [editingTicket]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const newTicket = {
-      id: uuidv4(),
-      subject,
-      description,
-      severity,
-      assignedTo,
-      createdAt: new Date().toISOString(),
-    };
-
-    addTicket(newTicket);
-    setTickets((prev) => [...prev, newTicket]);
-
-    toast.success("Ticket created! 🐇");
+    if (editingTicket) {
+      const updated = {
+        ...editingTicket,
+        subject,
+        description,
+        severity,
+        assignedTo,
+      };
+      updateTicket(editingTicket.id, updated);
+      setTickets((prev) =>
+        prev.map((ticket) =>
+          ticket.id === editingTicket.id ? updated : ticket
+        )
+      );
+      toast.success("Ticket updated 🛠️");
+      setEditingTicket(null);
+    } else {
+      const newTicket = {
+        id: uuidv4(),
+        subject,
+        description,
+        severity,
+        assignedTo,
+        createdAt: new Date().toISOString(),
+      };
+      addTicket(newTicket);
+      setTickets((prev) => [...prev, newTicket]);
+      toast.success("Ticket created! 🐇");
+    }
 
     // Reset form
     setSubject("");
@@ -102,7 +127,7 @@ export default function Form({ setTickets }) {
         {/* Submit Button */}
         <div className=" mt-6">
           <button type="submit" className="btn btn-primary">
-            Create Ticket
+            {editingTicket ? "Update Ticket" : "Create Ticket"}
           </button>
         </div>
       </form>
